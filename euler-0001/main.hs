@@ -7,14 +7,23 @@ findN large small = quot large small
 
 noOfThrees = findN 999 3
 noOfFives = findN 999 5
+noOfFifteens = findN 999 15
 
 sumOfFirstN n = (n * (n + 1)) / 2
 
 multiplyThree n = n * 3
 multiplyFive n = n * 5
+multiplyFifteens n = n * 15
 
-findSumOfMultiplesOfThree = sigma (findN 999 3) (sumOfFirstN multiplyThree)
+aggregate :: [Int] -> Int
+aggregate = foldr (+) 0
 
 -- Implement sigma operation
--- sigma count func =
+sigma lowerBound upperBound func = aggregate(map func [lowerBound .. upperBound])
 
+findSumOfMultiplesOfThree = sigma 1 noOfThrees multiplyThree
+findSumOfMultiplesOfFive = sigma 1 noOfFives multiplyFive
+findSumOfMultiplesOfFifteens = sigma 1 noOfFifteens multiplyFifteens
+
+-- http://math.stackexchange.com/a/9305
+ans = findSumOfMultiplesOfThree + findSumOfMultiplesOfFive - findSumOfMultiplesOfFifteens
