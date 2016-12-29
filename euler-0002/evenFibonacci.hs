@@ -6,9 +6,12 @@
 -- By considering the terms in the Fibonacci sequence whose values do not exceed four million,
 -- find the sum of the even-valued terms.
 
--- http://stackoverflow.com/a/24487284/5154397
-evenFib :: Integer -> Integer
-evenFib 0 = 0
-evenFib 1 = 2
+fibo a b = a:fibo b (a+b)
 
-evenFib n = evenFib(n - 2) + (4 * evenFib(n - 1))
+firstNFibos n = (take n (fibo 0 1))
+
+evens xs = filter even xs
+
+addm' = foldl (+) 0
+
+sumOfEvenFibs n = addm' (evens (firstNFibos n))
