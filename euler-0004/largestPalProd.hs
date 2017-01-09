@@ -11,3 +11,7 @@ reversal :: Integral a => a -> a
 reversal = go 0
   where go a 0 = a
         go a b = let (q,r) = b `quotRem` 10 in go (a*10 + r) q
+
+-- http://codereview.stackexchange.com/a/67292
+largestPal = maximum[x*y | x <- [800 .. 999], y <- [800 .. x], reverse(show(x*y)) ==show(x*y)]
+
