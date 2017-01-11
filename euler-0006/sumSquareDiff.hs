@@ -7,3 +7,13 @@
 --Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 − 385 = 2640.
 
 --Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum
+
+sumOfSqs :: Int -> Int
+sumOfSqs n =  quot (n * (n + 1) * ((2 * n) + 1))  6
+
+sqSums :: Int -> Int
+sqSums n = (quot (n * (n + 1)) 2) ^ 2
+
+sqDiff :: Int -> Int
+sqDiff n = (sqSums n) - (sumOfSqs n)
+
