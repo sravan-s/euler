@@ -3,11 +3,9 @@
 -- What is the 10 001st prime number?
 
 -- https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
-largest = maxBound :: Int
+primes :: [Int]
+primes = sieve [2 ..]
+  where
+    sieve (p:xs) = p : sieve [ x | x <- xs, x `mod` p > 0]
 
-allNums = [2 .. largest]
-
-isDivisible num arr = filter (\x ->  x `mod` num == 0) arr
-
-primes = map (\num -> isDivisible num allNums) allNums
-
+nthPrime n = primes!!(n - 1)
