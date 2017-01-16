@@ -3,9 +3,12 @@
 -- What is the 10 001st prime number?
 
 -- https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
-primes :: [Int]
-primes = sieve [2 ..]
-  where
-    sieve (p:xs) = p : sieve [ x | x <- xs, x `mod` p > 0]
+-- http://stackoverflow.com/a/3596543
+primes' :: [Int]
+primes' = 2: 3: sieve (tail primes') [5,7..]
+ where
+  sieve (p:ps) xs = h ++ sieve ps [x | x <- t, x `rem` p /= 0]
+                                -- or:  filter ((/=0).(`rem`p)) t
+                  where (h,~(_:t)) = span (< p*p) xs
 
-nthPrime n = primes!!(n - 1)
+nthPrime n = primes'!!(n - 1)
