@@ -1,13 +1,14 @@
 -- The prime factors of 13195 are 5, 7, 13 and 29.
 -- What is the largest prime factor of the number 600851475143 ?
 
--- Pollard’s Rho Algorithm for Prime Factorization
--- http://www.geeksforgeeks.org/pollards-rho-algorithm-prime-factorization/
--- https://www.cs.colorado.edu/~srirams/courses/csci2824-spr14/pollardsRho.html
+primes' :: [Int]
+primes' = 2: 3: sieve (tail primes') [5,7..]
+ where
+  sieve (p:ps) xs = h ++ sieve ps [x | x <- t, x `rem` p /= 0]
+                                -- or:  filter ((/=0).(`rem`p)) t
+                  where (h,~(_:t)) = span (< p*p) xs
 
--- function to generate pseudo random numbers
-import System.Random
+primesUntil :: Int -> [Int]
+primesUntil n = takeWhile (<= n / 2) primes'
 
-ramdomConst dom range = randomRs(1, 100)
-
-pseudoRandom n const base = (n * n) + const mod base
+largestPrimeFactor n = last [z | z <- (primesUntil n), n `mod` z == 0]
