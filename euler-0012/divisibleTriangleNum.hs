@@ -15,6 +15,11 @@
 -- 28: 1,2,4,7,14,28
 -- We can see that 28 is the first triangle number to have over five divisors
 
--- What is the value of the first triangle number 
+-- What is the value of the first triangle number
 -- to have over five hundred divisors?
 
+tNum :: Int -> Int
+tNum n = (n * (n + 1)) `quot` 2
+
+tSeries :: Int -> [Int]
+tSeries n = map tNum [1 .. n]
