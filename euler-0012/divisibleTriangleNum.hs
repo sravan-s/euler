@@ -18,8 +18,13 @@
 -- What is the value of the first triangle number
 -- to have over five hundred divisors?
 
-tNum :: Int -> Int
-tNum n = (n * (n + 1)) `quot` 2
+-- http://stackoverflow.com/a/32172277
+triangulars = scanl (+) 1 [2 ..]
 
-tSeries :: Int -> [Int]
-tSeries n = map tNum [1 .. n]
+isqrt :: Int -> Int
+isqrt = floor . sqrt . fromIntegral
+
+numDivisors :: Int -> Int
+numDivisors num = (length [x | x <- [1 .. isqrt num], num `mod` x == 0]) * 2
+
+firsTriangleWithNDivisors n = takeWhile (==n) (map numDivisors triangulars)
