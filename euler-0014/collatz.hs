@@ -12,6 +12,7 @@
 
 --NOTE: Once the chain starts the terms are allowed to go above one million
 
+--Reference: http://notes-on-haskell.blogspot.in/2007/06/solving-collatz-sequences.html
 collatz :: Int -> Int
 collatz 1 = 1
 collatz n = if (odd n)
