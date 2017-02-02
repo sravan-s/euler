@@ -11,3 +11,15 @@
 --Which starting number, under one million, produces the longest chain?
 
 --NOTE: Once the chain starts the terms are allowed to go above one million
+
+collatz :: Int -> Int
+collatz 1 = 1
+collatz n = if (odd n)
+              then ((3 * n) + 1)
+              else n `div` 2
+
+collatzSeries :: Int -> [Int]
+collatzSeries = terminate . iterate collatz
+                where
+                  terminate (1:_) = [1]
+                  terminate (x:xs) = x:terminate xs
